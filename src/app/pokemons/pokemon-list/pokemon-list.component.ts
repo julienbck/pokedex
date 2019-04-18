@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
+import {Pokemon} from '../pokemon.model';
+import {PagedData} from '../paged-data.model';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -8,7 +10,7 @@ import { PokemonService } from '../pokemon.service';
 })
 export class PokemonListComponent implements OnInit {
 
-  pokemons = {data : [], limit: 20, offset: 0};
+  pokemons: PagedData<Pokemon> = { data: [], limit: 20, offset: 0};
 
   constructor(private pokemonService: PokemonService) { }
 
@@ -19,11 +21,11 @@ export class PokemonListComponent implements OnInit {
   getPokemons(offset, limit) {
     this.pokemonService.getPokemons(offset, limit).subscribe(pokemons => {
       this.pokemons.data = this.pokemons.data.concat(pokemons.data);
-      this.pokemons.offset = pokemons.offset + 20;
     });
   }
 
   onScroll() {
+    this.pokemons.offset = this.pokemons.offset + 20;
     this.getPokemons(this.pokemons.offset, this.pokemons.limit);
   }
 

@@ -1,4 +1,4 @@
-export interface PagedData<T>{
+export interface PagedData<T> {
   data: T[];
   limit: number;
   offset: number;

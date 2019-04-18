@@ -1,0 +1,26 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600';
+$btn-green: #A2DB95;
+$btn-blue: #24CCAA;
+$primary: #436a6b;
+$muted: #757575;
+$powerupbg: #e9f0e1;
+$gengar-light: #736c9e;
+$gengar-dark: #434278;
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-family: 'Open Sans';
+}
+
+@mixin linearGradient($dir, $clr1, $clr2) {
+  background: linear-gradient($dir, $clr1, $clr2);
+}
+
+body {
+  width: 100%;
+  @include linearGradient(to top, darken($gengar-light, 10%), darken($gengar-dark, 25%));
+}

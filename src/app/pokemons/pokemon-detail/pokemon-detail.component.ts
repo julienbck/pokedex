@@ -17,6 +17,7 @@ export class PokemonDetailComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.idPokemon) {
+      this.pokemon = null;
       this.getPokemon(this.idPokemon);
     }
   }

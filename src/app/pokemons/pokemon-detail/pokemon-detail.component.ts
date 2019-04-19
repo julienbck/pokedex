@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, Input, SimpleChange} from '@angular/core';
 import {PokemonService} from '../pokemon.service';
 import {ActivatedRoute} from '@angular/router';
-import {Location } from '@angular/common';
 
 
 @Component({
@@ -9,24 +8,20 @@ import {Location } from '@angular/common';
   templateUrl: './pokemon-detail.component.html',
   styleUrls: ['./pokemon-detail.component.scss']
 })
-export class PokemonDetailComponent implements OnInit {
+export class PokemonDetailComponent implements OnChanges {
 
+  @Input() idPokemon: number;
   pokemon;
 
-  constructor(private route: ActivatedRoute, private pokemonService: PokemonService,  private  location: Location) { }
+  constructor(private route: ActivatedRoute, private pokemonService: PokemonService) { }
 
-  ngOnInit() {
-    this.getPokemon();
+  ngOnChanges() {
+    if (this.idPokemon) {
+      this.getPokemon(this.idPokemon);
+    }
   }
 
-  getPokemon() {
-    const idPokemon = +this.route.snapshot.paramMap.get('idPokemon');
-
-    this.pokemonService.getPokemon(idPokemon).subscribe(pokemon => this.pokemon = pokemon);
+  getPokemon(idPokemon = 1) {
+    this.pokemonService.getPokemonById(idPokemon).subscribe(pokemon => this.pokemon = pokemon);
   }
-
-  goBack(): void {
-    this.location.back();
-  }
-
 }

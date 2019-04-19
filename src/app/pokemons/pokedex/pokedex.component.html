@@ -1,0 +1,4 @@
+<mat-sidenav-container class="example-container" style="overflow:hidden;">
+  <mat-sidenav mode="side" opened ><app-pokemon-list (idUpdated)="pokemonId = $event"></app-pokemon-list></mat-sidenav>
+  <mat-sidenav-content><app-pokemon-detail [idPokemon]="pokemonId"></app-pokemon-detail></mat-sidenav-content>
+</mat-sidenav-container>

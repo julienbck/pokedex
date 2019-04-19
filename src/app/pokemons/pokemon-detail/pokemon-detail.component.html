@@ -1,47 +1,44 @@
-<div *ngIf="pokemon" class="card-container">
+<div class="wrapper">
+  <div class="card-container">
 
-  <div class="pokemon-container">
+    <div *ngIf="pokemon" class="pokemon-container">
 
-    <div class="power-level">
-      n°<span>{{pokemon.id | number:'3.0'}}</span>
+      <div class="power-level">
+        n°<span>{{pokemon.id | number:'3.0'}}</span>
 
-      <div class="pokemon-snap">
-        <img src="assets/img/official-artwork/{{pokemon.id}}.png" />
+        <div class="pokemon-snap">
+          <img src="assets/img/official-artwork/{{pokemon.id}}.png" />
+        </div>
+        <!-- !.pokemon-snap -->
+        <div class="half-circle"></div>
       </div>
-      <!-- !.pokemon-snap -->
-      <div class="half-circle"></div>
+      <!-- !.power-level -->
+      <div class="poke-card">
+
+        <div class="name">
+          <h1>{{pokemon.name}}     <i (click)="cry.play()" style="cursor: pointer" class="material-icons">
+            audiotrack
+          </i></h1>
+          <audio #cry autoplay>
+            <source src="assets/audio/{{pokemon.id}}.mp3" type="audio/mpeg">
+          </audio>
+
+           {{pokemon.description}}
+        </div>
+
+
+
+        <ul class="stats">
+          <li style="font-size: 14px;"><p style="width: auto; display: inline;" *ngFor="let type of pokemon.types; last as isLast">{{ type }} <span *ngIf="!isLast" style="font-weight: bold; font-size: 16px"> / </span> </p><br /><span>Type</span></li>
+          <li>{{pokemon.weight | number:'1.1'}}kg<br /><span>Weight</span></li>
+          <li>{{pokemon.height | number:'1.1'}}m<br /><span>Height</span></li>
+        </ul>
+      </div>
+      <!-- !.poke-card -->
+
     </div>
-    <!-- !.power-level -->
-    <div class="poke-card">
-
-      <div class="name">
-        <h1>{{pokemon.name}}</h1>
-         {{pokemon.description}}
-      </div>
-
-      <audio #cry autoplay>
-        <source src="assets/audio/{{pokemon.id}}.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-
-      <button (click)="cry.play()">Test</button>
-
-      <ul class="stats">
-        <li><p *ngFor="let type of pokemon.types; last as isLast">{{ type }} <span *ngIf="!isLast" style="font-weight: bold; font-size: 16px"> / </span> </p><br /><span>Type</span></li>
-        <li>{{pokemon.weight | number:'1.1'}}kg<br /><span>Weight</span></li>
-        <li>{{pokemon.height | number:'1.1'}}m<br /><span>Height</span></li>
-      </ul>
-      <!-- !.info -->
-
-      <div class="transfer">
-        <button class="button" (click)="goBack()">Go Back</button>
-      </div>
-
-    </div>
-    <!-- !.poke-card -->
+    <!-- !.pokemon-container -->
 
   </div>
-  <!-- !.pokemon-container -->
-
+  <!-- !.card-container -->
 </div>
-<!-- !.card-container -->
